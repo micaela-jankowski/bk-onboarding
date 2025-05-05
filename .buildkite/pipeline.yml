@@ -1,12 +1,18 @@
-# FOR HOSTED AGENT (REQUIRES PIPELINE SETING CLUSTER UPDATE)
+# # FOR HOSTED AGENT (REQUIRES PIPELINE SETING CLUSTER UPDATE)
 agents:
   queue: hosted-mac-sm
 
 steps:
-  - label: "Build and Upload Artifact"
-    command: echo "Hello, Buildkite!"
+  - label: 🔮 ponder stacks of orbs
+    command: |
+      brew install orbstack
+      which docker
+    key: pre-docker
+  - label: 🐳 docker build stuff
+    command: echo "hello, containerized world!"
     # command: cd hello && ls && go build -o ./my-hello-app
     key: "build-step"
+    depends_on: ["pre-docker"]
     artifact_paths: "hello/my-hello-app"
     plugins:
       - docker#v5.11.0:

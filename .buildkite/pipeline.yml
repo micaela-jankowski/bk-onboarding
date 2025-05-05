@@ -2,7 +2,6 @@
 agents:
   queue: hosted-mac-sm
 
-
 steps:
   - label: "Build and Upload Artifact"
     command: echo "Hello, Buildkite!"

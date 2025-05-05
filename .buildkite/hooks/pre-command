@@ -6,13 +6,11 @@ os_info=$(uname -a)
 if [[ "$os_name" == "Darwin" ]]; then
   echo "Operating system '$os_info' is macOS (Darwin)."
   brew install orbstack
-  orb start
   which docker
-  docker info
+  orb start
 elif [[ "$os_name" == "Linux" ]]; then
   echo "Operating system '$os_info' is Linux."
   which docker
-  docker info
 else
   echo "Operating system '$os_info' is neither macOS nor Linux."
 fi

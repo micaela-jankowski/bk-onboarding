@@ -1,7 +1,6 @@
-
 # FOR HOSTED AGENT (REQUIRES PIPELINE SETING CLUSTER UPDATE)
-# agents:
-#   queue: hosted-mac-sm
+agents:
+  queue: hosted-mac-sm
 
 
 steps:

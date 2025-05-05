@@ -6,7 +6,8 @@
 
 steps:
   - label: "Build and Upload Artifact"
-    command: cd hello && ls && go build -o ./my-hello-app
+    command: echo "Hello, Buildkite!"
+    # command: cd hello && ls && go build -o ./my-hello-app
     key: "build-step"
     artifact_paths: "hello/my-hello-app"
     plugins:
@@ -14,22 +15,22 @@ steps:
           image: "golang:1.18.0"
           mount-buildkite-agent: true
           debug: true
-  - input: "Name Input"
-    fields:
-      - text: "Please input your name!"
-        key: "user-name"
-    key: "user-input-step"
-    depends_on: ["build-step"]
-  - label: "Output user name"
-    commands: |
-      buildkite-agent artifact download hello/my-hello-app .
-      cd hello
-      chmod +x ./my-hello-app
-      file ./my-hello-app 
-      ./my-hello-app "$(buildkite-agent meta-data get user-name)"
-    depends_on: ["user-input-step"]
-    plugins:
-      - docker#v5.11.0:
-          image: "golang:1.18.0"
-          mount-buildkite-agent: true
-          debug: true
+  # - input: "Name Input"
+  #   fields:
+  #     - text: "Please input your name!"
+  #       key: "user-name"
+  #   key: "user-input-step"
+  #   depends_on: ["build-step"]
+  # - label: "Output user name"
+  #   commands: |
+  #     buildkite-agent artifact download hello/my-hello-app .
+  #     cd hello
+  #     chmod +x ./my-hello-app
+  #     file ./my-hello-app 
+  #     ./my-hello-app "$(buildkite-agent meta-data get user-name)"
+  #   depends_on: ["user-input-step"]
+  #   plugins:
+  #     - docker#v5.11.0:
+  #         image: "golang:1.18.0"
+  #         mount-buildkite-agent: true
+  #         debug: true

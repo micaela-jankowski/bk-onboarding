@@ -3,7 +3,7 @@ agents:
 
 env:
   GO_IMAGE: "golang:1.18.10"
-  NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
+  USER_NAME: "$(buildkite-agent meta-data get user-name)"
 
 docker: &docker
   docker#v5.12.0:
@@ -29,7 +29,7 @@ steps:
     depends_on: ["user-input-step"]
     commands:
       - chmod +x ./hello/hello
-      - ./hello/hello ${NAME_INPUT}
+      - ./hello/hello ${USER_NAME}
     plugins:
       - artifacts#v1.9.4:
         download: hello/hello

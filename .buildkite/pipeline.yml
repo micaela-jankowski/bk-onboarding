@@ -1,6 +1,6 @@
 # # FOR HOSTED AGENT (REQUIRES PIPELINE SETING CLUSTER UPDATE)
 agents:
-  queue: hosted-mac-sm
+  queue: hosted-linux-sm-arm
 
 steps:
   - label: "Build and Upload Artifact"

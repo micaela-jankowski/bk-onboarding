@@ -16,8 +16,9 @@ steps:
     key: "build-step"
     command: go build -o hello/hello hello/hello.go
     plugins:
+    plugins:
       - artifacts#v1.9.4:
-        upload: hello/hello
+          upload: hello/hello
       - *docker
   - input: "Name Input"
     fields:
@@ -32,5 +33,5 @@ steps:
       - ./hello/hello ${USER_NAME}
     plugins:
       - artifacts#v1.9.4:
-        download: hello/hello
+          download: hello/hello
       - *docker

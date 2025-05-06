@@ -21,11 +21,11 @@ steps:
           upload: hello/hello
       - *docker
   - input: "Name Input"
+    key: "user-input-step"
+    depends_on: ["build-step"]
     fields:
       - text: "Please input your name!"
         key: "user-name"
-    key: "user-input-step"
-    depends_on: ["build-step"]
   - label: "Output user name"
     depends_on: ["user-input-step"]
     commands:

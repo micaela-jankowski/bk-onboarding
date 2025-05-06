@@ -3,6 +3,7 @@ agents:
 
 env:
   GO_IMAGE: "golang:1.18.10"
+  NAME_INPUT: "$(buildkite-agent meta-data get name-input)"
 
 docker: &docker
   docker#v5.12.0:
@@ -12,10 +13,11 @@ docker: &docker
 
 steps:
   - label: "Build and Upload Artifact"
-    command: cd hello && go build -o ./my-hello-app
     key: "build-step"
-    artifact_paths: "hello/my-hello-app"
+    command: go build -o hello/hello hello/hello.go
     plugins:
+      - artifacts#v1.9.4:
+        upload: hello/hello
       - *docker
   - input: "Name Input"
     fields:
@@ -24,12 +26,11 @@ steps:
     key: "user-input-step"
     depends_on: ["build-step"]
   - label: "Output user name"
-    commands: |
-      buildkite-agent artifact download hello/my-hello-app .
-      cd hello
-      chmod +x ./my-hello-app
-      file ./my-hello-app 
-      ./my-hello-app "$(buildkite-agent meta-data get user-name)"
     depends_on: ["user-input-step"]
+    commands:
+      - chmod +x ./hello/hello
+      - ./hello/hello ${NAME_INPUT}
     plugins:
+      - artifacts#v1.9.4:
+        download: hello/hello
       - *docker

@@ -16,7 +16,6 @@ steps:
     key: "build-step"
     command: go build -o hello/hello hello/hello.go
     plugins:
-    plugins:
       - artifacts#v1.9.4:
           upload: hello/hello
       - *docker

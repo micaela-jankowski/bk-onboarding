@@ -1,5 +1,5 @@
 agents:
-  queue: hosted-linux-sm-arm
+  queue: hosted-mac-sm
 
 env:
   GO_IMAGE: "golang:1.18.10"
